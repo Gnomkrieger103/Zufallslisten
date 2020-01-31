@@ -1,0 +1,79 @@
+public class Abgabe
+{
+
+    public static int[] ZufallsListe(int n){
+        int[] liste = new int[n];
+        int x;
+        for(int i=0; i<n;i++){
+            x = (int) Math.floor(n*Math.random()+1); 
+            liste[i] = x;
+        }
+
+        return liste;
+    }
+
+    public static boolean IstSortiert(int[] liste) {
+        int n=0;
+        for(int i =0;i<liste.length-1;i++){
+
+            if(liste[i]<liste[i+1]){
+                n++;
+            }
+        }
+        if(n==liste.length-1){return true;}
+        else {return false;}
+
+    }
+
+    public static int[] Tauschen(int[] zahlenreihe, int a , int b)
+    {
+        /*int[] neueliste = new int[zahlenreihe.length];
+        for (int i=0;i<zahlenreihe.length;i=i+1) {
+        neueliste[i] = zahlenreihe[i];
+        }
+        neueliste[a] = zahlenreihe[b];
+        neueliste[b] = zahlenreihe[a];
+         */
+        int[] neueliste = zahlenreihe;
+        int temp = zahlenreihe[a];
+        neueliste[a] = zahlenreihe[b];
+        neueliste[b] = temp;
+
+        return neueliste;
+    }
+
+    public static int[] SortierenT(int[] liste) {
+        for(int i=1;i<liste.length;i++){
+            //if(IstSortiert(liste)==false){
+            for(int n=0;n<liste.length-i;n++){
+                if(liste[n]>liste[n+1]){
+                    liste=Tauschen(liste,n,n+1);
+                }
+            }
+            //}
+        }
+        return liste;
+    }
+
+    public static void Ausgabe(int[] liste) {
+        System.out.print("{");
+        for (int i =0; i<liste.length-1;i++) {
+            System.out.print(liste[i]+", ");
+        }
+        System.out.println(liste[liste.length-1]+"}");
+    }
+
+    public static void main(String[]args){
+        System.out.println("Listenlänge: | Zeit:");
+        for(int n=10000;n<50001;n=n+5000){
+            int[] liste = ZufallsListe(n);
+            long start = System.currentTimeMillis();
+            int[] sortierteliste = SortierenT(liste);
+            long ende = System.currentTimeMillis();
+            System.out.println(n+" | "+(ende-start)+" ms");
+        }
+        //Ausgabe(liste);
+        //Ausgabe(sortierteliste);
+    }
+
+}

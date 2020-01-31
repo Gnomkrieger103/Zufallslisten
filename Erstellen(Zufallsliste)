@@ -1,0 +1,54 @@
+
+public class Zufallszahlen
+{
+
+    public int[] Zahlenreihe(int n)
+    {
+        int[] liste = new int[n];
+        for (int i=0;i<n;i++) {
+            liste[i] = i;
+        }
+        return liste;
+    }
+
+    public int[] Tauschen(int[] zahlenreihe, int a , int b)
+    {
+        int[] neueliste = new int[zahlenreihe.length];
+        for (int i=0;i<zahlenreihe.length;i=i+1) {
+            neueliste[i] = zahlenreihe[i];
+        }
+        neueliste[a] = zahlenreihe[b];
+        neueliste[b] = zahlenreihe[a];
+
+        return neueliste;
+    }
+
+    public int[] ZufallsTauschen(int[] zahlenreihe)
+    {
+        int[] neueliste = new int[zahlenreihe.length];
+        for (int i=0;i<zahlenreihe.length;i=i+1) {
+            neueliste[i] = zahlenreihe[i];
+        }
+        int x = (int) Math.floor(zahlenreihe.length*Math.random());
+        int x2 = (int) Math.floor(zahlenreihe.length*Math.random());
+        while(x==x2){ x2= (int) Math.floor(zahlenreihe.length*Math.random());}
+        neueliste[x] = zahlenreihe[x2];
+        neueliste[x2] = zahlenreihe[x];
+
+        return neueliste;
+    }
+
+    public int[] Zufallsliste(int n)
+    {
+        int[]liste1 = new int[n];
+        int[]liste2 = new int[n];
+        liste1 = Zahlenreihe(n);
+        liste2 = ZufallsTauschen(liste1);
+        for( int i =0;i<n;i=i+1){
+            liste1 = liste2;
+            liste2 = ZufallsTauschen(liste1);
+        }
+        return liste2;
+    }
+
+}

@@ -34,12 +34,11 @@ public class Abgabe
         neueliste[a] = zahlenreihe[b];
         neueliste[b] = zahlenreihe[a];
          */
-        int[] neueliste = zahlenreihe;
         int temp = zahlenreihe[a];
-        neueliste[a] = zahlenreihe[b];
-        neueliste[b] = temp;
+        zahlenreihe[a] = zahlenreihe[b];
+        zahlenreihe[b] = temp;
 
-        return neueliste;
+        return zahlenreihe;
     }
 
     public static int[] SortierenT(int[] liste) {
@@ -64,13 +63,13 @@ public class Abgabe
     }
 
     public static void main(String[]args){
-        System.out.println("Listenlänge: | Zeit:");
-        for(int n=10000;n<50001;n=n+5000){
+        System.out.println("Listenlänge: | Zeit(ms):");
+        for(int n=0;n<50001;n=n+1000){
             int[] liste = ZufallsListe(n);
             long start = System.currentTimeMillis();
             int[] sortierteliste = SortierenT(liste);
             long ende = System.currentTimeMillis();
-            System.out.println(n+" | "+(ende-start)+" ms");
+            System.out.println(n+" | "+(ende-start));
         }
         //Ausgabe(liste);
         //Ausgabe(sortierteliste);

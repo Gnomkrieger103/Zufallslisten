@@ -1,4 +1,4 @@
-public class Abgabe
+public class Bubblesort
 {
 
     public static int[] ZufallsListe(int n){
@@ -10,6 +10,11 @@ public class Abgabe
         }
 
         return liste;
+    }
+    
+    public static int[] CopyPaste(int[] liste){
+        int[] liste2 = liste;
+        return liste2;
     }
 
     public static boolean IstSortiert(int[] liste) {
@@ -25,7 +30,7 @@ public class Abgabe
 
     }
 
-    public static int[] Tauschen(int[] zahlenreihe, int a , int b)
+    public static void Tauschen(int[] zahlenreihe, int a , int b)
     {
         /*int[] neueliste = new int[zahlenreihe.length];
         for (int i=0;i<zahlenreihe.length;i=i+1) {
@@ -37,21 +42,18 @@ public class Abgabe
         int temp = zahlenreihe[a];
         zahlenreihe[a] = zahlenreihe[b];
         zahlenreihe[b] = temp;
-
-        return zahlenreihe;
     }
 
-    public static int[] SortierenT(int[] liste) {
+    public static void SortierenT(int[] liste) {
         for(int i=1;i<liste.length;i++){
             //if(IstSortiert(liste)==false){
             for(int n=0;n<liste.length-i;n++){
                 if(liste[n]>liste[n+1]){
-                    liste=Tauschen(liste,n,n+1);
+                    Tauschen(liste,n,n+1);
                 }
             }
             //}
         }
-        return liste;
     }
 
     public static void Ausgabe(int[] liste) {
@@ -66,8 +68,9 @@ public class Abgabe
         System.out.println("Listenlänge: | Zeit(ms):");
         for(int n=0;n<50001;n=n+1000){
             int[] liste = ZufallsListe(n);
+            int [] liste2 = CopyPaste(liste);
             long start = System.currentTimeMillis();
-            int[] sortierteliste = SortierenT(liste);
+            SortierenT(liste);
             long ende = System.currentTimeMillis();
             System.out.println(n+" | "+(ende-start));
         }

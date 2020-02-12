@@ -1,0 +1,76 @@
+public class EigeneSort
+{
+
+    public static int[] ZufallsListe(int n){
+        int[] liste = new int[n];
+        int x;
+        for(int i=0; i<n;i++){
+            x = (int) Math.floor(n*Math.random()+1); 
+            liste[i] = x;
+        }
+
+        return liste;
+    }
+
+    public static boolean IstSortiert(int[] liste) {
+        int n=0;
+        for(int i =0;i<liste.length-1;i++){
+
+            if(liste[i]<liste[i+1]){
+                n++;
+            }
+        }
+        if(n==liste.length-1){return true;}
+        else {return false;}
+
+    }
+
+    public static void Sortieren(int[] liste) {
+        int temp = 0;
+        int in = 0;
+        int[] liste2 = new int[liste.length]; 
+        for(int j=liste.length-1;j>=0;j--){
+            for(int n=0;n<liste.length;n++){
+                if(liste[n]>temp){
+                    temp = liste[n];
+                    in = n;
+                    liste2[j] = temp;
+                }
+            }
+            liste[in] = 0;
+            temp = 0;
+            in = 0;
+        }
+    }
+    
+    public static int[] Copy(int[] liste) {
+        int[] cliste = new int[liste.length];
+        for(int n=0;n<liste.length;n++){
+            cliste[n] = liste[n];
+        }
+        return cliste;
+    }
+
+    public static void Ausgabe(int[] liste) {
+        System.out.print("{");
+        for (int i =0; i<liste.length-1;i++) {
+            System.out.print(liste[i]+", ");
+        }
+        System.out.println(liste[liste.length-1]+"}");
+    }
+
+    public static void main(String[]args){
+        System.out.println("Listenlänge: | Zeit(ms):");
+        for(int n=0;n<50001;n=n+1000){
+            int[] liste = ZufallsListe(n);
+            int[] cliste = Copy(liste);
+            long start = System.currentTimeMillis();
+            Sortieren(liste);
+            long ende = System.currentTimeMillis();
+            System.out.println(n+" | "+(ende-start));
+        }
+        //Ausgabe(liste);
+        //Ausgabe(sortierteliste);
+    }
+
+}

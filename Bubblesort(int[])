@@ -12,9 +12,12 @@ public class Bubblesort
         return liste;
     }
     
-    public static int[] CopyPaste(int[] liste){
-        int[] liste2 = liste;
-        return liste2;
+    public static int[] Copy(int[] liste) {
+        int[] cliste = new int[liste.length];
+        for(int n=0;n<liste.length;n++){
+            cliste[n] = liste[n];
+        }
+        return cliste;
     }
 
     public static boolean IstSortiert(int[] liste) {
@@ -68,7 +71,7 @@ public class Bubblesort
         System.out.println("Listenlänge: | Zeit(ms):");
         for(int n=0;n<50001;n=n+1000){
             int[] liste = ZufallsListe(n);
-            int [] liste2 = CopyPaste(liste);
+            int [] liste2 = Copy(liste);
             long start = System.currentTimeMillis();
             SortierenT(liste);
             long ende = System.currentTimeMillis();

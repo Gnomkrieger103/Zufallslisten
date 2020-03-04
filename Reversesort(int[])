@@ -1,4 +1,4 @@
-public class EigeneSort
+public class Reversesort
 {
 
     public static int[] ZufallsListe(int n){
@@ -25,7 +25,7 @@ public class EigeneSort
 
     }
 
-    public static void Sortieren(int[] liste) {
+    public static int[] reversesort(int[] liste) {
         int temp = 0;
         int in = 0;
         int[] liste2 = new int[liste.length]; 
@@ -41,6 +41,7 @@ public class EigeneSort
             temp = 0;
             in = 0;
         }
+        return liste2;
     }
     
     public static int[] Copy(int[] liste) {
@@ -61,16 +62,17 @@ public class EigeneSort
 
     public static void main(String[]args){
         System.out.println("Listenlänge: | Zeit(ms):");
-        for(int n=0;n<50001;n=n+1000){
+        //for(int n=0;n<50001;n=n+1000){
+            int n=1000;
             int[] liste = ZufallsListe(n);
             int[] cliste = Copy(liste);
             long start = System.currentTimeMillis();
-            Sortieren(liste);
+            int[] sortierteliste = reversesort(liste);
             long ende = System.currentTimeMillis();
             System.out.println(n+" | "+(ende-start));
-        }
-        //Ausgabe(liste);
-        //Ausgabe(sortierteliste);
+        //}
+        Ausgabe(liste);
+        Ausgabe(sortierteliste);
     }
 
 }

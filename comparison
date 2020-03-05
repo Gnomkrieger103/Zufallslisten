@@ -122,7 +122,7 @@ public class Vergleich
     {
         System.out.println("Listenlänge: RS:BS:QS | Zeit(ms):");
         int i = 0;
-        for(int n=2;n<=Math.pow(2,26);n=2*n){
+        for(int n=2;n<=Math.pow(2,24);n=2*n){
             i++;
             //Erstellung einer Zufallsliste mit der Länge n
             int[] liste = zufallsliste(n);

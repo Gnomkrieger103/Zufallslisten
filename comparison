@@ -1,6 +1,6 @@
 public class Vergleich
 {
-    
+
     public static int[] zufallsliste(int n){ //Erstellung einer Zufallsliste mit der Länge n
         int[] liste = new int[n];
         int x;
@@ -11,7 +11,7 @@ public class Vergleich
 
         return liste;
     }
-    
+
     public static int[] copy(int[] liste) { //Erstellung einer Liste mit den gleichen Zahlen wie in "liste"
         int[] cliste = new int[liste.length];
         for(int n=0;n<liste.length;n++){
@@ -19,8 +19,9 @@ public class Vergleich
         }
         return cliste;
     }
-    
-    public static int[] reversesort(int[] liste) { //Durchsucht die Liste nach dem größten Wert und speichert diesen in einer zweiten Liste
+
+    public static int[] reversesort(int[] liste) { //Durchsucht die Liste nach dem größten Wert 
+        //und speichert diesen in einer zweiten Liste
         int temp = 0;
         int in = 0;
         int[] liste2 = new int[liste.length]; 
@@ -40,34 +41,35 @@ public class Vergleich
         }
         return liste2;
     }
-    
+
     public static void bubblesort(int[] liste) {
         //Array wird von vorne nach hinten durchlaufen
         for(int i=1;i<liste.length;i++){
             for(int n=0;n<liste.length-i;n++){
-                //Überprüfung, ob der jeweilige Wert an der Indexposition "n" größer als sein Nachfolgewert an Indexposition "n+1" ist
+                //Überprüfung, ob der jeweilige Wert an der Indexposition "n" größer als sein 
+                //Nachfolgewert an Indexposition "n+1" ist
                 if(liste[n]>liste[n+1]){
                     tauschen(liste,n,n+1);
                 }
             }
         }
     }
-    
+
     public static void quicksort(int[] liste, int links, int rechts) 
     {
         //Überprüfung, ob die Liste leer oder eine Länge von 0 hat
         if (liste == null || liste.length == 0){
             return;
         }
-         
+
         if (links >= rechts){
             return;
         }
- 
+
         //Ermittlung des Pivot-Elements aus der Mitte der Liste
         int mitte = links + (rechts - links) / 2;
         int pivot = liste[mitte];
- 
+
         //Macht "links" kleiner als das Pivot-Element und "rechts" größer als das Pivot-Element
         int i = links;
         int j = rechts;
@@ -95,19 +97,19 @@ public class Vergleich
         if (links < j){
             quicksort(liste, links, j);
         }
-        
+
         if (rechts > i){
             quicksort(liste, i, rechts);
         }
     }
-     
+
     public static void tauschen (int[] liste, int a, int b) //Tauscht die Werte an der Indexposition a und b
     {
         int temp = liste[a];
         liste[a] = liste[b];
         liste[b] = temp;
     }
-    
+
     public static void ausgabe(int[] liste) {
         System.out.print("{");
         for (int i =0; i<liste.length-1;i++) {
@@ -115,29 +117,48 @@ public class Vergleich
         }
         System.out.println(liste[liste.length-1]+"}");
     }
-    
+
     public static void main(String[] args) 
     {
         System.out.println("Listenlänge: RS:BS:QS | Zeit(ms):");
-        for(int n=0;n<100001;n=n+1000){
+        int i = 0;
+        for(int n=2;n<=Math.pow(2,26);n=2*n){
+            i++;
             //Erstellung einer Zufallsliste mit der Länge n
             int[] liste = zufallsliste(n);
             //Erstellung einer Kopie der Liste
             int [] liste2 = copy(liste);
             int [] liste3 = copy(liste);
-            long start = System.currentTimeMillis();
-            //Sortiert die Liste mit Reversesort
-            reversesort(liste);
-            long ende = System.currentTimeMillis();
-            long start2 = System.currentTimeMillis();
-            //Sortiert die Liste mit Bubblesort
-            bubblesort(liste);
-            long ende2 = System.currentTimeMillis();
-            long start3 = System.currentTimeMillis();
+            long start = 0;
+            long start2 = 0;
+            long start3 = 0;
+            long ende = 0;
+            long ende2 = 0;
+            long ende3 = 0;
+            if(i<=18){
+                start = System.currentTimeMillis();
+                //Sortiert die Liste mit Reversesort
+                reversesort(liste);
+                ende = System.currentTimeMillis();
+            }
+            if(i<=19){
+                start2 = System.currentTimeMillis();
+                //Sortiert die Liste mit Bubblesort
+                bubblesort(liste);
+                ende2 = System.currentTimeMillis();
+            }
+            start3 = System.currentTimeMillis();
             //Sortiert die Liste mit Quicksort
             quicksort(liste, 0, liste.length - 1 );
-            long ende3 = System.currentTimeMillis();
-            System.out.println(n+":"+(ende-start)+":"+(ende2-start2)+":"+(ende3-start3));
+            ende3 = System.currentTimeMillis();
+            if(i<=18){
+                System.out.println("2^"+i+":"+(ende-start)+":"+(ende2-start2)+":"+(ende3-start3));
+            } else
+            if(i==19){
+                System.out.println("2^"+i+":"+"X"+":"+(ende2-start2)+":"+(ende3-start3));
+            } else{
+                System.out.println("2^"+i+":"+"X"+":"+"X"+":"+(ende3-start3));
+            }
         }
     }
 
